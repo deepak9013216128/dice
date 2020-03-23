@@ -1,0 +1,13 @@
+.title{
+	font-size: 2em;
+	color: #FF851B;
+}
+.dice {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+}
+.dies{
+	display: flex;
+	justify-content: space-around;
+}

@@ -1,0 +1,16 @@
+.dice-game {
+	display: flex;
+	justify-content: space-around;
+}
+.hidden {
+	display: none;
+}
+.winner {
+	color: rgb(0,256,0,0.6);
+}
+.losser {
+	color: rgb(256,0,0,0.6);
+}
+.draw {
+	color: lightgray;
+}
