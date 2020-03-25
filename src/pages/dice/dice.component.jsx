@@ -20,27 +20,31 @@ class Dice extends React.Component {
 			shake:false
 		}
 	}
-	handleShake = () =>{
+	shaking = () =>{
 		this.setState({
 			shake:false
 		})
 	}
+	handleClear = () => {
+		this.setState(()=>({
+			die1:0,
+			die2:0,
+			playerWon:0,
+			computerWon:0,
+			draw:0
+		}))
+	}
 	handleCompare = ()=>{
 		const {roll} = this.state;
-		let winner;
-		const idx1 = Math.floor(Math.random()*this.state.roll.length)
-		const idx2 = Math.floor(Math.random()*this.state.roll.length)
-		if(idx1 >idx2){
-			winner = "playerWon";
-		}else if(idx1 === idx2){
-			winner = "draw";
-		}else{
-			winner = "computerWon";
-		}
+		
+		const idx1 = Math.floor(Math.random()*roll.length)
+		const idx2 = Math.floor(Math.random()*roll.length)
+
+		let winner = idx1 >idx2 
+					? "playerWon" 
+					: idx1 === idx2 ?"draw":"computerWon";
+		
 		this.setState({
-			// die1:idx1,
-			// die2:idx2,
-			// [winner]: this.state[winner]+1,
 			shake:true
 		},()=>{
 			setTimeout(()=>{
@@ -51,8 +55,8 @@ class Dice extends React.Component {
 				})
 			},1000)
 		})
-		
 	}
+
 	render(){
 		const {
 			die1,
@@ -76,15 +80,18 @@ class Dice extends React.Component {
 					<Die 
 						num={roll[die1]}
 						shake={shake}
-						handleShake={this.handleShake}
+						shaking={this.shaking}
 					/>
 					<Die 
 						num={roll[die2]}
 						shake={shake}
-						handleShake={this.handleShake}
+						shaking={this.shaking}
 					/>
 				</div>
-				<RollingDie handleCompare={this.handleCompare}/>
+				<RollingDie 
+					handleCompare={this.handleCompare}
+					handleClear = {this.handleClear}
+				/>
 			</div>
 		)
 	}
